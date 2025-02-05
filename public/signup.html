@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required />
+            </div>
+            <div>
+                <label for="firstname">First Name:</label>
+                <input type="text" id="firstname" name="firstname" required />
+            </div>
+            <div>
+                <label for="lastname">Last Name:</label>
+                <input type="text" id="lastname" name="lastname" required />
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required />
+            </div>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Log in here</a>.</p>
+    </div>
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById("username").value;
+            const firstname = document.getElementById("firstname").value;
+            const lastname = document.getElementById("lastname").value;
+            const password = document.getElementById("password").value;
+
+            // Make API call to signup endpoint
+            const response = await fetch("/api/auth/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, firstname, lastname, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert("Signup successful! Redirecting to login page...");
+                window.location.href = "login.html";
+            } else {
+                alert("Signup failed: " + data.message);
+            }
+        });
+    </script>
+</body>
+</html>

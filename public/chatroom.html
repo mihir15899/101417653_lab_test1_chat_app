@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room Selection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chatroom-container">
+        <h2>Welcome, <span id="username"></span></h2>
+        <form id="roomForm">
+            <div>
+                <label for="room">Select a Room:</label>
+                <select id="room" required>
+                    <option value="General">General</option>
+                    <option value="Sports">Sports</option>
+                    <option value="News">News</option>
+                    <option value="Technology">Technology</option>
+                </select>
+            </div>
+            <button type="submit">Join Room</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const username = localStorage.getItem("username");
+            if (!username) {
+                window.location.href = "login.html"; // Redirect to login if not authenticated
+            }
+            document.getElementById("username").innerText = username;
+
+            document.getElementById("roomForm").addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const room = document.getElementById("room").value;
+
+                // Redirect to the chat page with the selected room
+                window.location.href = `chat.html?username=${username}&room=${room}`;
+            });
+        });
+    </script>
+</body>
+</html>

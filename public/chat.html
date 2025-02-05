@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script defer src="chat.js"></script>
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h2>Chat</h2>
+            <button class="leave-btn" onclick="leaveRoom()">Leave Room</button>
+        </header>
+        <main class="chat-main">
+            <div class="chat-sidebar">
+                <h3>Room: <span id="room-name">News</span></h3>
+                <h4>Members:</h4>
+                <ul id="users"></ul>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+        </main>
+        <div class="chat-form-container">
+            <form id="chat-form">
+                <input
+                    id="message"
+                    type="text"
+                    placeholder="Type your message here..."
+                    required
+                    autocomplete="off"
+                />
+                <button type="submit" class="btn">Send</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
